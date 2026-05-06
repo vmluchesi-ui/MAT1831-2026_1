@@ -1,0 +1,37 @@
+function w = calcularPesosNewtonCotes(n)
+    % n: número de subintervalos
+    % Retorna os pesos w_i que multiplicam h
+    
+    nos = 0:n;
+    w = zeros(1, n+1);
+    
+    for i = 1:(n+1)
+        % Começamos com o polinômio P(s) = 1 (representado por [1])
+        L_i = [1]; 
+        denominador = 1;
+        
+        for j = 1:(n+1)
+            if i ~= j
+                % Multiplicação polinomial: (s - nos(j))
+                % Em Octave, (s - a) é representado pelo vetor [1, -a]
+                L_i = conv(L_i, [1, -nos(j)]);
+                denominador = denominador * (nos(i) - nos(j));
+            end
+        end
+        
+        % L_i agora contém os coeficientes do polinômio de Lagrange
+        % Normalizamos pelo denominador
+        L_i = L_i / denominador;
+        
+        % Integramos o polinômio. polyint retorna os coeficientes da integral
+        p_int = polyint(L_i);
+        
+        % Avaliamos a integral de 0 a n: F(n) - F(0)
+        % polyval(p_int, n) calcula o valor no limite superior
+        % polyval(p_int, 0) é sempre o termo constante (geralmente 0)
+        w(i) = polyval(p_int, n) - polyval(p_int, 0);
+    end
+    
+    fprintf('Pesos para n = %d:\n', n);
+    disp(w);
+end

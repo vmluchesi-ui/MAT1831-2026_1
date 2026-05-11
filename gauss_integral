@@ -1,0 +1,17 @@
+function I = gauss_integral(a, b, n, fun)
+
+[x, w] = gauss_legendre(n);
+
+xm = (a + b)/2;
+xr = (b - a)/2;
+
+I = 0;
+
+for i = 1:n
+    t = xm + xr*x(i);
+    I = I + w(i)*fun(t);
+end
+
+I = xr * I;
+
+end

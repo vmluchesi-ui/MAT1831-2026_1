@@ -1,0 +1,31 @@
+## Author: vmluc <vmluc@DESKTOP>
+## Created: 2026-05-15
+
+f = @(t,y) -2*y + 1;%mude a função f(x,y) de acordo com os dados do PVI
+
+t0 = 0;  y0 = 1;% se necessário mude o valor de t0 e y0 dado no PVI
+h = 0.1;% se necessário mede o valor de h=b-a/m onde m é o número de subintervalos
+N = (2 - t0)/h;
+
+t = zeros(1, N+1);
+y = zeros(1, N+1);
+
+t(1) = t0;
+y(1) = y0;
+
+for k = 1:N
+    k1 = f(t(k), y(k));
+    k2 = f(t(k)+h/2, y(k) + h*k1/2);
+    k3 = f(t(k)+h/2, y(k) + h*k2/2);
+    k4 = f(t(k)+h, y(k) + h*k3);
+
+    y(k+1) = y(k) + (h/6)*(k1 + 2*k2 + 2*k3 + k4);
+    t(k+1) = t(k) + h;
+end
+
+
+
+y_exata = 0.5 + 0.5*exp(-2*t);%mude a solução exata de acordo com os dados do PVI
+
+plot(t, y, 'o-', t, y_exata, 'LineWidth', 2)
+legend('Numérica', 'Analítica')

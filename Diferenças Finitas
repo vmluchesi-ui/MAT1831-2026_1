@@ -1,0 +1,43 @@
+%Método de Diferenças Finitas 
+%(adaptado das Notas de Matemática aplicada da SBMAC - volume 61)
+%Introdução ao Método de Elementos Finitos
+%Márcio da S. Carvalho e Juliana V. Valério
+%=========Dados de entrada
+N=15; %número de intervalos entre 0 e 1
+h=1/N; %distância entre um ponto a outro ponto da discretização
+M=zeros(N-1,N-1); %alocando espaço para a Matriz M
+b=zeros(N-1,N-1); %alocando espaço para o vetor b
+%Vamos resolver o sistema Mc=b com condição y=0 para x=0
+x=[h:h:1]; %vetor dos pontos da discretização: inicia em h e vai até 1
+%============== Escrevendo a Matriz M e o vetor b 
+i=1
+M(i,i)=2-h^2;
+M(i,i+1)=-1;
+b(i,1)=-h^2*x(i)^2;
+for i=2:N-1
+  M(i,i-1)=-1;
+  M(i,i)=2-h^2;
+  M(i,i+1)=-1;
+  b(i,1)=-h^2*x(i)^2;
+end
+i=N;
+ M(i,i-1)=-1;
+  M(i,i)=1;
+  b(i,1)=h;
+%========Resolvendo o Sistema Mc=b
+c=M\b
+%+++++Colocando a condição y=0 para x=0 
+xp=[0:h:1];
+cp=[0;c(:,1)];
+%====Solução Analítica do Problema
+y=(2*cos(xp-1)-sin(xp))/cos(1)+xp.^2-2;
+%=====Erro absoluto
+Erro=norm(cp-y,inf)
+
+%Gráfico
+figure
+plot(xp,y,'r',xp,cp, 'bo', 'LineWidth', 2, 'MarkerSize', 8)
+legend('Solução Exata', 'Método de Diferenças Finitas')
+xlabel('x', 'Fontsize', 20)
+ylabel('y(x)', 'Fontsize', 20)
+title('Solução Numérica versus Solução Analítica',  'Fontsize', 16)

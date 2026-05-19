@@ -25,7 +25,7 @@ i=N;
   M(i,i)=1;
   b(i,1)=h;
 %========Resolvendo o Sistema Mc=b
-c=M\b
+c=M\b;
 %+++++Colocando a condição y=0 para x=0 
 xp=[0:h:1];
 cp=[0;c(:,1)];

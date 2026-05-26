@@ -1,0 +1,33 @@
+% RAIZES DE EQUAÇÕES NÃO-LINEARES - Metodo da Bissecao
+clc; clear all
+
+ao=input('Forneça limite inferior do intervalo:')
+bo=input('Forneça limite superior do intervalo:')
+
+err=bo-ao;
+k=1;
+tic
+
+while err > 0.5E-10 & k < 50 
+ x=(ao+bo)/2
+ fx=fun(x)
+ fa0=fun(ao)
+ fb0=fun(bo)
+ if fun(x)*fun(ao) > 0
+      ao=x
+ else
+      bo=x
+ end
+err=bo-ao;  
+k=k+1; 
+end 
+
+disp('     ')
+disp('MÉTODO DA  BISSECÇÃO')
+disp('aproximação para raiz é:')
+x 
+disp('valor da função na raiz:')
+f=fun(x) 
+disp('número de iterações:')
+k
+toc

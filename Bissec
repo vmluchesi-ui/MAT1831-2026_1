@@ -10,7 +10,7 @@ tic
 
 while err > 0.5E-10 & k < 50 
  x=(ao+bo)/2
- fx=fun(x)
+ fx=fun(x) %arquivo function com a função
  fa0=fun(ao)
  fb0=fun(bo)
  if fun(x)*fun(ao) > 0

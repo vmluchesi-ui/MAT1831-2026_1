@@ -6,9 +6,9 @@ function [x, k] = newton(f, df, x0, tol, maxit)
     % tol: tolerância
     % maxit: máximo de iterações
 %=====Exemplo Como usar=====
-%f  = @(x) x.^2 - 4;
+%f  = @(x) x.^2 - 4; (ou fun.m)
 %df = @(x) 2*x;
-% ou fun
+% 
 %[x, k] = newton(f, df, 3, 1e-6, 50)
 %====================
     x = x0;

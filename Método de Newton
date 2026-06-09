@@ -1,0 +1,23 @@
+function [x, k] = newton(f, df, x0, tol, maxit)
+    % Método de Newton para f(x)=0
+    % f  : função
+    % df : derivada de f
+    % x0 : chute inicial
+    % tol: tolerância
+    % maxit: máximo de iterações
+%=====Exemplo Como usar=====
+%f  = @(x) x.^2 - 4;
+%df = @(x) 2*x;
+% ou fun
+%[x, k] = newton(f, df, 3, 1e-6, 50)
+%====================
+    x = x0;
+    for k = 1:maxit
+        x_new = x - f(x)/df(x);
+        if abs(x_new - x) < tol
+            x = x_new;
+            return
+        end
+        x = x_new;
+    end
+end

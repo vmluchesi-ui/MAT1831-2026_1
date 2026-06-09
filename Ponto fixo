@@ -1,0 +1,25 @@
+function [x, k] = ponto_fixo(g, x0, tol, maxit)
+    % g  : função
+    % x0 : chute inicial
+    % tol: tolerância
+    % maxit: máximo de iterações
+%=====Exemplo Como usar=====
+%===Pacote simbolic
+%g = @(x) cos(x);
+%===ou em outro arquivo defina g.m
+%function y = g(x)
+   % y = cos(x);   % exemplo
+%end
+%===Na janela de comandos escreva:
+%[x, k] = ponto_fixo(@g, 0.5, 1e-6, 100)
+%====================
+    x = x0;
+    for k = 1:maxit
+        x_new = g(x);
+        if abs(x_new - x) < tol
+            x = x_new;
+            return;
+        end
+        x = x_new;
+    end
+end

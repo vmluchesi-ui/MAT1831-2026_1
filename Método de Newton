@@ -6,10 +6,19 @@ function [x, k] = newton(f, df, x0, tol, maxit)
     % tol: tolerância
     % maxit: máximo de iterações
 %=====Exemplo Como usar=====
+%===Pacote simbolic
 %f  = @(x) x.^2 - 4; (ou fun.m)
 %df = @(x) 2*x;
-% 
-%[x, k] = newton(f, df, 3, 1e-6, 50)
+%===ou em outro arquivo defina f.m e df.m
+%function y = f(x)
+   % y = x.^2 - 4;   % exemplo
+%end
+%function y = df(x)
+    %y = 2*x;       % derivada
+%end
+%===Na janela de comandos escreva:
+%[x, k] = newton(@f, @df, 3, 1e-6, 50)
+%====================
 %====================
     x = x0;
     for k = 1:maxit

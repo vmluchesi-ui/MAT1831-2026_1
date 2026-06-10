@@ -17,7 +17,7 @@ function [x, k] = newton(f, df, x0, tol, maxit)
     %y = 2*x;       % derivada
 %end
 %===Na janela de comandos escreva:
-%[x, k] = newton(@f, @df, 3, 1e-6, 50)
+%[x, k] = newton(f, df, 3, 1e-6, 50)
 %====================
 %====================
     x = x0;

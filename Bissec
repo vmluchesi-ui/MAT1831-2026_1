@@ -3,7 +3,7 @@ clc; clear all
 
 ao=input('Forneça limite inferior do intervalo:')
 bo=input('Forneça limite superior do intervalo:')
-
+format long
 err=bo-ao;
 k=1;
 tic

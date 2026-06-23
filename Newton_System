@@ -1,0 +1,19 @@
+function [x, history] = newton_system(F, J, x0, tol, maxit)
+    x = x0;
+    history = zeros(maxit,1);
+
+    for k = 1:maxit
+        Fx = F(x);
+        Jx = J(x);
+
+        s = -Jx \ Fx;
+        x = x + s;
+
+        history(k) = norm(s);
+
+        if norm(s) < tol
+            history = history(1:k);
+            return
+        end
+    end
+end
